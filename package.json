@@ -1,0 +1,33 @@
+{
+  "name": "react-form-validation",
+  "version": "1.0.0",
+  "description": "Simple react form validation",
+  "main": "lib/FormValidation.js",
+  "types": "lib/FormValidation.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "prepare" : "npm run build",
+    "version" : "git add -A src",
+    "postversion" : "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/net-engine/react-form-validation.git"
+  },
+  "author": "NetEngine",
+  "keywords": ["React", "Form", "Validation", "Context"],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/net-engine/react-form-validation/issues"
+  },
+  "homepage": "https://github.com/net-engine/react-form-validation#readme",
+  "dependencies": {
+    "react": "^16.12.0",
+    "typescript": "^3.7.5"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.19"
+  },
+  "files": ["lib/**/*"]
+}
