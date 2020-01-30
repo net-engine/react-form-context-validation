@@ -1,8 +1,15 @@
-import React, { useContext, useMemo, useEffect, useCallback, useState, ReactNode, useRef } from 'react';
+import React, { useContext, useMemo, useEffect, useCallback, useState, ReactNode, useRef, useReducer } from 'react';
+
+type FormErrors = Record<string, string | boolean>;
+
+interface FormValidator {
+  id: string;
+  error: string | boolean;
+}
 
 interface FormValidationType {
-  errors: Record<string, string | boolean>;
-  setError: (id: string, error: string | boolean) => void;
+  errors: FormErrors;
+  setValid: (validator: FormValidator) => void;
   valid: boolean;
 };
 
@@ -11,29 +18,26 @@ interface Props {
 }
 
 const Context = React.createContext<FormValidationType>({
-  setError: () => null,
+  setValid: () => null,
   errors: {},
   valid: true,
 });
 
+function errorsReducer (errors: FormErrors, { id, error }: FormValidator) {
+  const newErrors = {...errors};
+  if (error) {
+    newErrors[id] = error;
+  } else {
+    delete newErrors[id];
+  }
+  return newErrors;
+}
+
 export default function FormValidation ({ children }: Props): JSX.Element {
-  const [errors, setErrors] = useState<Record<string, string | boolean>>({})
-
-  const setError = useCallback((id: string, error: string | boolean) => {
-    setErrors(prevErrors => {
-      const newErrors = {...prevErrors};
-      if (error) {
-        newErrors[id] = error;
-      } else {
-        delete newErrors[id];
-      }
-      return newErrors;
-    });
-  }, [setErrors]);
-
+  const [errors, setValid] = useReducer(errorsReducer, {});
   return (
     <Context.Provider value={{
-      setError,
+      setValid,
       errors,
       valid: Object.values(errors).length < 1,
     }}>
@@ -64,7 +68,7 @@ interface ValidatorProps<T> {
 }
 
 export function useFormValidator<T extends string | boolean>({ id, error }: ValidatorProps<T>): T {
-  const { setError } = useFormValidation();
+  const { setValid } = useFormValidation();
   const validatorCount = useRef(0);
 
   const validatorId = useMemo(() => {
@@ -74,12 +78,18 @@ export function useFormValidator<T extends string | boolean>({ id, error }: Vali
   }, [id]);
 
   useEffect(() => {
-    setError(validatorId, error || false)
-  }, [error, setError, validatorId]);
+    setValid({
+      id: validatorId,
+      error
+    })
+  }, [error, setValid, validatorId]);
 
   useEffect(() => {
-    return () => setError(validatorId, false)
-  }, [validatorId, setError]);
+    return () => setValid({
+      id: validatorId,
+      error: false
+    })
+  }, [validatorId, setValid]);
 
   return error;
 }
