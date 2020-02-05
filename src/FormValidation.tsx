@@ -8,8 +8,8 @@ interface FormValidator {
 }
 
 interface FormValidationType {
-  errors: FormErrors;
-  setValid: (validator: FormValidator) => void;
+  formErrors: FormErrors;
+  setValidator: (validator: FormValidator) => void;
   valid: boolean;
 };
 
@@ -18,8 +18,8 @@ interface Props {
 }
 
 const Context = React.createContext<FormValidationType>({
-  setValid: () => null,
-  errors: {},
+  setValidator: () => null,
+  formErrors: {},
   valid: true,
 });
 
@@ -34,12 +34,12 @@ function errorsReducer (errors: FormErrors, { id, error }: FormValidator) {
 }
 
 export default function FormValidation ({ children }: Props): JSX.Element {
-  const [errors, setValid] = useReducer(errorsReducer, {});
+  const [formErrors, setValidator] = useReducer(errorsReducer, {});
   return (
     <Context.Provider value={{
-      setValid,
-      errors,
-      valid: Object.values(errors).length < 1,
+      setValidator,
+      formErrors,
+      valid: Object.values(formErrors).length < 1,
     }}>
       {children}
     </Context.Provider>
@@ -68,7 +68,7 @@ interface ValidatorProps<T> {
 }
 
 export function useFormValidator<T extends string | boolean>({ id, error }: ValidatorProps<T>): T {
-  const { setValid } = useFormValidation();
+  const { setValidator } = useFormValidation();
   const validatorCount = useRef(0);
 
   const validatorId = useMemo(() => {
@@ -78,18 +78,18 @@ export function useFormValidator<T extends string | boolean>({ id, error }: Vali
   }, [id]);
 
   useEffect(() => {
-    setValid({
+    setValidator({
       id: validatorId,
       error
     })
-  }, [error, setValid, validatorId]);
+  }, [error, setValidator, validatorId]);
 
   useEffect(() => {
-    return () => setValid({
+    return () => setValidator({
       id: validatorId,
       error: false
     })
-  }, [validatorId, setValid]);
+  }, [validatorId, setValidator]);
 
   return error;
 }
