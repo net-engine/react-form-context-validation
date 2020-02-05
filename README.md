@@ -28,7 +28,6 @@ function MyForm (): JSX.Element {
       <RequiredField
         value={value}
         onChange={setValue}
-        required={true}
         name="testField"
       />
 
@@ -73,7 +72,7 @@ function RequiredField ({ value, onChange, name }: FieldProps): JSX.Element {
 
   // Unique ID can be set for each validator to reference later
   // if no ID is set one will be added dynamically
-  const errorString = useFormValidator(!value ? 'Required!' : false, name);
+  const errorString = useFormValidator(!value && 'Required!', name);
 
   // Error can be a string to display to the user, or a boolean for convenience otherwise
   const error = useFormValidator(!value);
