@@ -4,7 +4,7 @@ React Form Validation is a minimalist package providing form validation to React
 
 ## Installation
 
-> npm install react-form-validation --save
+> npm install react-form-context-validation --save
 
 ## Requirements
 
@@ -14,7 +14,7 @@ React Form Validation is a minimalist package providing form validation to React
 
 ```JSX
 import React, { useState, ChangeEvent } from 'react';
-import FormValidation, { withFormValidation, useFormValidation, useFormValidator, FormValidationConsumer } from "react-form-validation";
+import FormValidation, { withFormValidation, useFormValidation, useFormValidator, FormValidationConsumer } from "react-form-context-validation";
 
 function MyForm (): JSX.Element {
   const [value, setValue] = useState('');
