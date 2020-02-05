@@ -4,11 +4,13 @@ React Form Context Validation is a minimalist package providing form validation 
 
 ## Installation
 
-> npm install react-form-context-validation --save
+```
+npm install react-form-context-validation --save
+```
 
 ## Requirements
 
-> React 16.8+
+React 16.8+
 
 ## Usage
 
