@@ -62,7 +62,6 @@ export default withFormValidation(MyForm)
 interface FieldProps {
   value: string;
   onChange: (val: string) => void;
-  required?: boolean;
   name?: string;
 }
 
