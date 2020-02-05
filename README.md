@@ -14,7 +14,7 @@ React Form Validation is a minimalist package providing form validation to React
 
 ```JSX
 import React, { useState, ChangeEvent } from 'react';
-import { withFormValidation, useFormValidation, useFormValidator } from "./FormValidation";
+import FormValidation, { withFormValidation, useFormValidation, useFormValidator, FormValidationConsumer } from "./FormValidation";
 
 function MyForm (): JSX.Element {
   const [value, setValue] = useState('');
@@ -60,7 +60,6 @@ function MyForm (): JSX.Element {
     </div>
   )
 }
-export default withFormValidation(MyForm)
 
 interface FieldProps {
   value: string;
@@ -69,7 +68,6 @@ interface FieldProps {
 }
 
 function RequiredField ({ value, onChange, name }: FieldProps): JSX.Element {
-
   // Unique ID can be set for each validator to reference later
   // if no ID is set one will be added dynamically
   const errorString = useFormValidator(!value && 'Required!', name);
@@ -90,6 +88,26 @@ function RequiredField ({ value, onChange, name }: FieldProps): JSX.Element {
         </span>
       )}
     </div>
+  )
+}
+
+// Use withFormValidation HOC to wrap component with FormValidation context provider when exported
+export default withFormValidation(MyForm)
+
+// Form validation context provider and consumer can be access directly via FormValidation and FormValidationConsumer
+function MyApp () {
+  return (
+    <FormValidation>
+      <MyForm />
+
+      <FormValidationConsumer>
+        {({ valid }) => (
+          <span>
+            My form {valid ? 'is' : `isn\'t`} valid!
+          </span>
+        )}
+      </FormValidationConsumer>
+    </FormValidation>
   )
 }
 ```
