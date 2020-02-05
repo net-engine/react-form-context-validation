@@ -14,7 +14,7 @@ React Form Validation is a minimalist package providing form validation to React
 
 ```JSX
 import React, { useState, ChangeEvent } from 'react';
-import FormValidation, { withFormValidation, useFormValidation, useFormValidator, FormValidationConsumer } from "./FormValidation";
+import FormValidation, { withFormValidation, useFormValidation, useFormValidator, FormValidationConsumer } from "react-form-validation";
 
 function MyForm (): JSX.Element {
   const [value, setValue] = useState('');
