@@ -28,7 +28,7 @@ function MyForm (): JSX.Element {
         name="testField"
       />
 
-      {/* formError can be indexed by ID to check for specific errors */}
+      {/* formErrors can be indexed by ID to check for specific errors */}
       {formErrors['valueLength'] && (
         <span>
           Value is not long enough!
@@ -70,9 +70,9 @@ function RequiredField ({ value, onChange, name }: FieldProps): JSX.Element {
 
   // Unique ID can be set for each validator to reference later
   // if no ID is set one will be added dynamically
-  //
-  // Error can be a string to display to the user, or a boolean for convenience otherwise
   const errorString = useFormValidator(!value ? 'Required!' : false, name);
+
+  // Error can be a string to display to the user, or a boolean for convenience otherwise
   const error = useFormValidator(!value);
 
   return (
