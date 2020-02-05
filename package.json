@@ -1,5 +1,5 @@
 {
-  "name": "react-form-validation",
+  "name": "react-form-context-validation",
   "version": "1.0.0",
   "description": "Simple react form validation",
   "main": "lib/FormValidation.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/net-engine/react-form-validation.git"
+    "url": "git+https://github.com/net-engine/react-form-context-validation.git"
   },
   "author": "NetEngine",
   "keywords": [
@@ -24,9 +24,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/net-engine/react-form-validation/issues"
+    "url": "https://github.com/net-engine/react-form-context-validation/issues"
   },
-  "homepage": "https://github.com/net-engine/react-form-validation#readme",
+  "homepage": "https://github.com/net-engine/react-form-context-validation#readme",
   "dependencies": {
     "react": "^16.12.0"
   },
