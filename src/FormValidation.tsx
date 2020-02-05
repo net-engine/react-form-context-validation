@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useEffect, ReactNode, useRef, useReducer } from 'react';
+import React, { useContext, useMemo, useEffect, ReactNode, useRef, useReducer, ComponentType } from 'react';
 
 type FormErrors = Record<string, string | boolean>;
 
@@ -62,12 +62,17 @@ export function useFormValidation (): FormValidationType {
   return useContext(Context);
 }
 
-interface ValidatorProps<T> {
-  id?: string;
-  error: T;
+export function withFormValidation<P extends object>(Component: ComponentType<P>) {
+  return function WrapperComponent(props: P) {
+    return (
+      <FormValidation>
+        <Component {...props} />
+      </FormValidation>
+    );
+  };
 }
 
-export function useFormValidator<T extends string | boolean>({ id, error }: ValidatorProps<T>): T {
+export function useFormValidator<T extends string | boolean>(error: T, id?: string): T {
   const { setValidator } = useFormValidation();
   const validatorCount = useRef(0);
 
