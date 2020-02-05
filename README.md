@@ -18,9 +18,14 @@ import FormValidation, { withFormValidation, useFormValidation, useFormValidator
 
 function MyForm (): JSX.Element {
   const [value, setValue] = useState('');
+
+  // useFormValidation hook can access form validation state from within the form tree
   const { valid, formErrors } = useFormValidation();
 
-  // Validators can be set anywhere in the form tree to check for errors
+  // Errors can be passed to useFormValidator to be added to formErrors from anywhere in the form tree
+  // if passed error is falsy, all reference to it will be removed from formErrors.
+  //
+  // A unique ID can be passed as the second parameter for reference, if no ID is passed one will be set dynamically
   useFormValidator(value.length < 10 && 'Value must be at least 10 characters long', 'valueLength');
 
   return (
@@ -68,11 +73,8 @@ interface FieldProps {
 }
 
 function RequiredField ({ value, onChange, name }: FieldProps): JSX.Element {
-  // Unique ID can be set for each validator to reference later
-  // if no ID is set one will be added dynamically
-  const errorString = useFormValidator(!value && 'Required!', name);
-
   // Error can be a string to display to the user, or a boolean for convenience otherwise
+  const errorString = useFormValidator(!value && 'Required!', name);
   const error = useFormValidator(!value);
 
   return (
