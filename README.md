@@ -1,6 +1,6 @@
-# React Form Validation
+# React Form Context Validation
 
-React Form Validation is a minimalist package providing form validation to React components using the React Context API with full typescript support.
+React Form Context Validation is a minimalist package providing form validation to React components using the React Context API with typescript support.
 
 ## Installation
 
