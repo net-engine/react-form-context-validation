@@ -6,6 +6,10 @@ React Form Validation is a minimalist package providing form validation to React
 
 > npm install react-form-validation --save
 
+## Requirements
+
+> React 16.8+
+
 ## Usage
 
 ```JSX
