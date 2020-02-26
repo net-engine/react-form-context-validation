@@ -72,14 +72,15 @@ export function withFormValidation<P extends object>(Component: ComponentType<P>
   };
 }
 
+let validatorCount = 0;
+
 export function useFormValidator<T extends string | boolean>(error: T, id?: string): T {
   const { setValidator } = useFormValidation();
-  const validatorCount = useRef(0);
 
   const validatorId = useMemo(() => {
     if (id) return id;
-    validatorCount.current++;
-    return `validator-${validatorCount.current}`;
+    validatorCount++;
+    return `validator-${validatorCount}`;
   }, [id]);
 
   useEffect(() => {
