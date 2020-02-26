@@ -1,6 +1,6 @@
 {
   "name": "react-form-context-validation",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simple react form validation",
   "main": "lib/FormValidation.js",
   "types": "lib/FormValidation.d.ts",
