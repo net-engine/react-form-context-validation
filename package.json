@@ -27,8 +27,8 @@
     "url": "https://github.com/net-engine/react-form-context-validation/issues"
   },
   "homepage": "https://github.com/net-engine/react-form-context-validation#readme",
-  "dependencies": {
-    "react": "^16.12.0"
+  "peerDependencies": {
+    "react": "^16.8.0"
   },
   "devDependencies": {
     "@types/react": "^16.9.19",
